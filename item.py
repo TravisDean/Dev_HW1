@@ -3,7 +3,7 @@ __author__ = 'Travis Dean'
 
 class Item:
     """Keeps track of the dataset items."""
-    def __init__(self, x, y, category):
+    def __init__(self, x, y, category = "None"):
         self.x = float(x)
         self.y = float(y)
         self.category = category

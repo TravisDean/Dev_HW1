@@ -3,21 +3,23 @@
 from item import Item
 from collections import Counter
 __author__ = 'Travis Dean'
+debug = False;
 
 def prompt():
-    k = input("Enter the value of k: ")
-    m = input("Enter the number of values to be read: ")
-    file = raw_input("Data file name: ")
+    k = int(raw_input("Enter the value of k: "))
+    m = int(raw_input("Enter the number of values to be read: "))
+    filename = raw_input("Data file name: ")
     print("When entering value pairs, separate by spaces without commas.")
-    return (k,m,file)
+    return (k,m,filename)
 
-def get_input(k = 3,m = 8, file = "testdata.txt"):
-    data = read_data(file)[:m]
-    done = False
-    while not done:
-        done = process_input(data, k)
+def get_input(k, m, filename):
+    data = read_data(filename)[:m]
+    while True:
+        x,y = raw_input("Enter a (X,Y) pair: ").split()
+        if (x == '1.0' and y == '1.0'): break
+        process_input(data, k, float(x), float(y))
 
-def read_data(filename = "testdata.txt"):
+def read_data(filename):
     lines = open(filename).readlines()
     data = []
     for d in lines:
@@ -25,29 +27,27 @@ def read_data(filename = "testdata.txt"):
         data.append(Item(x,y,c))
     return data
 
-def process_input(data, k):
-    x,y = raw_input("Enter (X,Y) pairs: ").split()
-    if (x == '1.0' and y == '1.0'): return True
-
+def process_input(data, k, x, y):
     count = Counter()
-    d = Item(x,y,"Input")
+    totals = Counter()
+    d = Item(x,y)
     nearest = sorted(data, key=lambda i: i.distance(d))[:k]
     for n in nearest:
-        print(str(n) + " " + str(n.distance(d)))
+        totals[n.category] += n.distance(d)
         count[n.category] += 1
+        print(str(n) + " " + str(n.distance(d)))
 
     winner = count.most_common(1)
     win_cat = winner[0][0]
     print("Data item (%s,%s) assigned to: %s" % (x,y,win_cat))
-    return False
 
-
-
-
+    for cat, total in totals.items():
+        print("Average distance to %s items: %f" % (cat, total / count[cat]))
 
 if __name__ == "__main__":
-    import sys
-    #prompt()
-    get_input()
+    if not debug:
+        get_input(*prompt())
+    else:
+        get_input(3,8, "testdata.txt")
 
 
