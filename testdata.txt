@@ -1,0 +1,8 @@
+Fruit -3 2
+Fruit 0 5
+Fruit -7 -2
+Fruit -1 1
+Vegetable 3 2
+Vegetable 5 8
+Vegetable 7 10
+Vegetable -1 5
