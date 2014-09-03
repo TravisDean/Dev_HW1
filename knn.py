@@ -18,7 +18,9 @@ def get_input(k, m, filename):
     data = read_data(filename)[:m]
     while True:
         x, y = raw_input("Enter a (X,Y) pair: ").split()
-        if x == '1.0' and y == '1.0': break
+        if x == '1.0' and y == '1.0':
+            print("Exiting program")
+            quit()
         process_input(data, k, float(x), float(y))
 
 

@@ -1,4 +1,4 @@
-import math
+from math import sqrt
 __author__ = 'Travis Dean'
 
 
@@ -10,8 +10,7 @@ class Item:
         self.category = category
 
     def distance(self, other):
-        return math.sqrt(math.pow((self.x-other.x), 2)
-                         + math.pow((self.y - other.y), 2))
+        return sqrt((self.x-other.x)**2 + (self.y-other.y)**2)
 
     # def distance(self, x, y):
     #     return math.sqrt(math.pow((self.x-x),2) + math.pow((self.y - y),2))
