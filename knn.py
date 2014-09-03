@@ -10,7 +10,7 @@ def prompt():
     k = int(raw_input("Enter the value of k: "))
     m = int(raw_input("Enter the number of values to be read: "))
     filename = raw_input("Data file name: ")
-    print("When entering value pairs, separate by spaces without commas.")
+    # print("When entering value pairs, separate by spaces without commas.")
     return k, m, filename
 
 
@@ -20,7 +20,7 @@ def get_input(k, m, filename):
         x, y = raw_input("Enter a (X,Y) pair: ").split()
         if x == '1.0' and y == '1.0':
             print("Exiting program")
-            quit()
+            return
         process_input(data, k, float(x), float(y))
 
 
